@@ -1,7 +1,3 @@
-const test = () => {
+exports.test = () => {
     return 'Hello from test service'
-}
-
-module.exports = {
-    test
 }
