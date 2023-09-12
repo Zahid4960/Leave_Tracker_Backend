@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const testController = require('../controlles/testController')
+const testController = require('../controllers/test.controller')
 
 router.get('/', testController.test)
 
