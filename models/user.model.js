@@ -1,29 +1,77 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const Common = require('./common.model')
 
-// Define the User schema
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
+  name: {
+    type: Name.schema,
+    required: true
   },
   email: {
     type: String,
     required: true,
     unique: true,
   },
+  address: [
+    {
+      type: Address.schema,
+      required: true
+    }  
+  ],
   age: {
-    type: Number,
-    min: 18,
+    type: Number
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  userType: {
+    type: String,
+    enum: ['Company', 'User'],
+    default: 'User'
   },
+  commonFields: {
+    type: Common.schema,
+    required: true
+  }
 });
 
-// Create a User model based on the schema
 const User = mongoose.model('User', userSchema);
 
-// Export the User model for use in other parts of your application
-module.exports = User;
+
+const nameSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String
+  },
+  userName: {
+    type: String
+  }
+})
+
+const Name = mongoose.model('Name', nameSchema)
+
+const addressSchema = new mongoose.Schema({
+  addresName: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  postalCode: {
+    type: String,
+    required: true
+  }
+})
+
+const Address = mongoose.model('Address', addressSchema)
+
+
+module.exports = User
