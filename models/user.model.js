@@ -1,55 +1,24 @@
-const mongoose = require('mongoose')
+const { mongoose, Schema } = require('mongoose')
 const Common = require('./common.model')
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: Name.schema,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  address: [
-    {
-      type: Address.schema,
-      required: true
-    }  
-  ],
-  age: {
-    type: Number
-  },
-  userType: {
-    type: String,
-    enum: ['Company', 'User'],
-    default: 'User'
-  },
-  commonFields: {
-    type: Common.schema,
-    required: true
-  }
-});
 
-const User = mongoose.model('User', userSchema);
-
-
-const nameSchema = new mongoose.Schema({
+const nameSchema = new Schema({
   firstName: {
     type: String,
     required: true
   },
   lastName: {
-    type: String
+    type: String,
+    default: ''
   },
   userName: {
-    type: String
+    type: String,
+    default: ''
   }
 })
 
-const Name = mongoose.model('Name', nameSchema)
 
-const addressSchema = new mongoose.Schema({
+const addressSchema = new Schema({
   addresName: {
     type: String,
     required: true
@@ -60,6 +29,7 @@ const addressSchema = new mongoose.Schema({
   },
   state: {
     type: String,
+    default: ''
   },
   country: {
     type: String,
@@ -71,7 +41,38 @@ const addressSchema = new mongoose.Schema({
   }
 })
 
-const Address = mongoose.model('Address', addressSchema)
 
+const userSchema = new Schema({
+  name: nameSchema,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  address: [addressSchema],
+  age: {
+    type: Number
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  emailVerifiedAt: {
+    typr: Date
+  },
+  otp: {
+    typr: Number
+  },
+  userType: {
+    type: String,
+    enum: ['Company', 'User'],
+    default: 'User'
+  },
+  commonFields: {
+    type: Schema.ObjectId,
+    ref: 'Common'
+  }
+});
 
-module.exports = User
+module.exports = User = mongoose.model('User', userSchema);
+

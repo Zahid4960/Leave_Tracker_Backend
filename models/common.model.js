@@ -1,34 +1,31 @@
-const mongoose = require('mongoose')
+const { mongoose, Schema } = require('mongoose')
 const User = require('./user.model')
 
-const commonSchema = new mongoose.Schema({
+const commonSchema = new Schema({
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now(),
     },
         updatedAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now(),
     },
     deletedAt: {
         type: Date,
     },
     createdBy: {
-        type: mongoose.ObjectId,
-        ref: User
+        type: Schema.ObjectId,
+        ref: 'User'
     },
     updatedBy: {
-        type: mongoose.ObjectId,
-        ref: User
+        type: Schema.ObjectId,
+        ref: 'User'
     },
     deletedBy: {
-        type: mongoose.ObjectId,
-        ref: User
+        type: Schema.ObjectId,
+        ref: 'User'
     }
 })
 
-const Common = mongoose.model('Common', commonSchema)
-
-
-module.exports = Common
+module.exports = Common = mongoose.model('Common', commonSchema)
 
