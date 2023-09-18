@@ -1,8 +1,9 @@
 const { mongoose, Schema } = require('mongoose')
-const Common = require('./common.model')
+const commonSchema = require('../schemas/common.schema')
+const addressSchema = require('../schemas/address.schema')
 
 
-const nameSchema = new Schema({
+const userSchema = new Schema({
   firstName: {
     type: String,
     required: true
@@ -14,36 +15,7 @@ const nameSchema = new Schema({
   userName: {
     type: String,
     default: ''
-  }
-})
-
-
-const addressSchema = new Schema({
-  addresName: {
-    type: String,
-    required: true
   },
-  city: {
-    type: String,
-    required: true
-  },
-  state: {
-    type: String,
-    default: ''
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  postalCode: {
-    type: String,
-    required: true
-  }
-})
-
-
-const userSchema = new Schema({
-  name: nameSchema,
   email: {
     type: String,
     required: true,
@@ -68,10 +40,7 @@ const userSchema = new Schema({
     enum: ['Company', 'User'],
     default: 'User'
   },
-  commonFields: {
-    type: Schema.ObjectId,
-    ref: 'Common'
-  }
+  ...commonSchema.obj
 });
 
 module.exports = User = mongoose.model('User', userSchema);

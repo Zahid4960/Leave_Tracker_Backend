@@ -1,5 +1,5 @@
 const { mongoose, Schema } = require('mongoose')
-const User = require('./user.model')
+const User = require('../models/user.model')
 
 const commonSchema = new Schema({
     createdAt: {
@@ -27,5 +27,5 @@ const commonSchema = new Schema({
     }
 })
 
-module.exports = Common = mongoose.model('Common', commonSchema)
+module.exports = commonSchema
 
