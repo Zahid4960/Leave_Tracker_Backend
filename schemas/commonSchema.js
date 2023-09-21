@@ -1,5 +1,5 @@
 const { mongoose, Schema } = require('mongoose')
-const User = require('../models/user.model')
+const User = require('../models/userModel')
 
 const commonSchema = new Schema({
     createdAt: {

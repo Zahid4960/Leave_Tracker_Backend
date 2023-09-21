@@ -1,6 +1,6 @@
 const { mongoose, Schema } = require('mongoose')
-const commonSchema = require('../schemas/common.schema')
-const addressSchema = require('../schemas/address.schema')
+const commonSchema = require('../schemas/commonSchema')
+const addressSchema = require('../schemas/addressSchema')
 
 
 const userSchema = new Schema({
@@ -21,23 +21,30 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  emailVerifiedAt: {
+    type: Date
+  },
+  recoveryEmail: {
+    type: String,
+  },
   address: [addressSchema],
-  age: {
-    type: Number
+  dop: {
+    type: String
   },
   password: {
     type: String,
     required: true
   },
-  emailVerifiedAt: {
-    typr: Date
+  isAccountActivatedByOwner: {
+    type: Boolean,
+    default: false
   },
   otp: {
     typr: Number
   },
   userType: {
     type: String,
-    enum: ['Company', 'User'],
+    enum: ['Company', 'User', 'Admin'],
     default: 'User'
   },
   ...commonSchema.obj
