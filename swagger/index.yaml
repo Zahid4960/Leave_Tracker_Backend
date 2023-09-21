@@ -1,0 +1,15 @@
+openapi: 3.0.0
+info:
+  title: Leave Tracker API
+  description: Leave tracker is a service where an institute, organization, company etc. can join and then add their employees into the system and very easily with minimum effort can manage their employees leave management system.
+  version: 1.0.0
+paths:
+  /:
+    get:
+      summary: Get a greeting
+      responses:
+        '200':
+          description: A successful response
+          content:
+            text/plain:
+              example: Hello, World!
