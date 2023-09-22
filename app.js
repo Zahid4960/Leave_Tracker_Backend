@@ -9,12 +9,15 @@ const path = require('path');
 const port = process.env.PORT
 
 const testRoute = require('./routers/test.router')
-const dbConnection = require('./config/dbConfig')
+
+const dbConfig = require('./config/dbConfig')
+const superAdminUserConfig = require('./config/superAdminUserConfig')
 
 
 const app = express()
 
-dbConnection()
+dbConfig.dbConnection()
+superAdminUserConfig.createSuperAdminUser()
 
 // Load YAML file
 const swaggerDocument = jsyaml.load(fs.readFileSync(path.join(__dirname, './swagger/index.yaml'), 'utf8'))
