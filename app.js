@@ -10,17 +10,17 @@ const port = process.env.PORT
 
 const authRoute = require('./routers/authRouter')
 
-const dbConfig = require('./config/dbConfig')
-const superAdminUserConfig = require('./config/superAdminUserConfig')
+const { dbConnection } = require('./config/dbConfig')
+const { createSuperAdminUser } = require('./config/superAdminUserConfig')
 
 
 const app = express()
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
-dbConfig.dbConnection()
-superAdminUserConfig.createSuperAdminUser()
+dbConnection()
+createSuperAdminUser()
 
 // Load YAML file
 const swaggerDocument = jsyaml.load(fs.readFileSync(path.join(__dirname, './swagger/index.yaml'), 'utf8'))

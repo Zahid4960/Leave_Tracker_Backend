@@ -1,5 +1,10 @@
 const userModel = require('../models/userModel')
-const authRepo = require('../repositories/authRepo')
+const { 
+    isUserExistOrNotByEmail, 
+    matchPassword,
+    generateToken,
+    tokenExpiresAt
+} = require('../repositories/authRepo')
 
 
 /**
@@ -10,28 +15,38 @@ const authRepo = require('../repositories/authRepo')
  * @returns exception || user payload on successful login
  */
 exports.login = async (email, password, isRemember) => {
-   let isUser = await authRepo.isUserExistOrNotByEmail(email)
+   let isUser = await isUserExistOrNotByEmail(email)
 
    if(isUser){
-        let user = await userModel.find({ email: email })
-        let hashedPassword = user[0].password
-
-        let isPasswordMatched = await authRepo.matchPassword(password, hashedPassword)
+        let user = await userModel.findOne({ email: email })
+       
+        let isPasswordMatched = await matchPassword(password, user.password)
 
         if(isPasswordMatched){
+            let token = await generateToken(user.email, process.env.JWT_SECRET, isRemember)
+
+            let tokenExpiry = await tokenExpiresAt(token)
+
+            user.token = token
+            user.isRemember = isRemember
+            user.save()
+            
             let userPayload = {
-                id: user[0]._id,
-                firstName: user[0].firstName,
-                email: user[0].email,
-                token: user[0].token,
-                userType: user[0].userType
+                id: user._id,
+                firstName: user.firstName,
+                email: user.email,
+                token: token,
+                tokenExpiresAt: tokenExpiry,
+                userType: user.userType
             }
 
             return userPayload
-        }else{
-            return 'Password not matched'
         }
-   }else{
-        return 'not user'
-   }
+        // else{
+        //     throw new exceptionHelper.customExceptionHandler(400, 'User does not exist!')
+        // }
+    }
+//     else{
+//         throw new Error('User does not exist!')
+//    }
 }

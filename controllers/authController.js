@@ -1,4 +1,9 @@
-const authService = require('../services/authService')
+const { login } = require('../services/authService')
+const { 
+    sendsuccessResponse, 
+    sendErrorResponse,
+    sendExceptionResponse 
+} = require('../helpers/responseHelper')
 
 
 /**
@@ -9,10 +14,15 @@ const authService = require('../services/authService')
 exports.logIn = async (req, res) => {
     let { email, password, isRemember } = req.body
     try{
-      let data = await authService.login(email, password, isRemember)
-      console.log(data)
-      res.json(data)
+      let data = await login(email, password, isRemember)
+
+      if(data){
+        sendsuccessResponse(res, 200, 'User data found!', data)
+      }
+
+      sendErrorResponse(res, 500, 'Invalid email or password!')
     }catch(err){
-        console.log(err)
+        console.error(err)
+        // sendExceptionResponse(res, err)
     }
 }

@@ -1,5 +1,9 @@
 const userModel = require('../models/userModel')
-const authRepo = require('../repositories/authRepo')
+const {
+    isUserExistOrNotByEmail,
+    generateHashedPasword,
+    generateToken
+} = require('../repositories/authRepo')
 
 const email = process.env.ADMIN_EMAIL
 const recoveryEmail = process.env.ADMIN_RECOVERY_EMIAL
@@ -24,7 +28,7 @@ const constantFile = require('./constants')
  */
 exports.createSuperAdminUser = async () => {
     try{
-        let user = await authRepo.isUserExistOrNotByEmail(email)
+        let user = await isUserExistOrNotByEmail(email)
         
         if(! user){
             if(createUser()){
@@ -65,8 +69,8 @@ const createUser = async () => {
         userType: constantFile.ADMIN,
     }
 
-    let hashedPassword = await authRepo.generateHashedPasword(AdminPassword, salt)
-    let jwtToken = await authRepo.generateToken(email, secret)
+    let hashedPassword = await generateHashedPasword(AdminPassword, salt)
+    let jwtToken = await generateToken(email, secret)
 
     userObject.password = hashedPassword
     userObject.token = jwtToken

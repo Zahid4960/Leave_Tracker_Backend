@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken')
 exports.isUserExistOrNotByEmail = async (email) => {
     let user = await userModel.find({ email: email })
 
-    return user.length > 0 ? true : false
+    return user !== null ? true : false
 }
 
 
@@ -33,8 +33,12 @@ exports.generateHashedPasword = async (plainPassword, salt) => {
  * @param {*} secret 
  * @returns jwt token
  */
-exports.generateToken = async (email, secret) => {
-    return await jwt.sign({ email: email}, secret)
+exports.generateToken = async (email, secret, isRemember = false) => {
+    return await jwt.sign(
+        { email: email}, 
+        secret, 
+        isRemember === true ? { expiresIn: '24h'} : { expiresIn: '1h'}
+    )
 }
 
 
@@ -46,4 +50,19 @@ exports.generateToken = async (email, secret) => {
  */
 exports.matchPassword = async (plainPassword, hashedPassword) => {
     return await bcrypt.compare(plainPassword, hashedPassword)
+}
+
+
+/**
+ * function to get token expiryy date & time from jwt token
+ * @param {*} token 
+ * @returns token expiry date & time
+ */
+exports.tokenExpiresAt = async (token) => {
+    let decodedToken = jwt.decode(token, { complete: true })
+
+    if (decodedToken && decodedToken.payload?.exp) {
+        const expirationTimeInMilliseconds =decodedToken.payload?.exp * 1000
+        return new Date(expirationTimeInMilliseconds)
+      }
 }
