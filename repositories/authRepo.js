@@ -36,3 +36,14 @@ exports.generateHashedPasword = async (plainPassword, salt) => {
 exports.generateToken = async (email, secret) => {
     return await jwt.sign({ email: email}, secret)
 }
+
+
+/**
+ * function to match user inputted password & hashed/encrypted password
+ * @param {*} plainPassword 
+ * @param {*} hashedPassword 
+ * @returns boolean
+ */
+exports.matchPassword = async (plainPassword, hashedPassword) => {
+    return await bcrypt.compare(plainPassword, hashedPassword)
+}

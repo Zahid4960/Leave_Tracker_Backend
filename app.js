@@ -8,13 +8,16 @@ const path = require('path');
 
 const port = process.env.PORT
 
-const testRoute = require('./routers/test.router')
+const authRoute = require('./routers/authRouter')
 
 const dbConfig = require('./config/dbConfig')
 const superAdminUserConfig = require('./config/superAdminUserConfig')
 
 
 const app = express()
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 dbConfig.dbConnection()
 superAdminUserConfig.createSuperAdminUser()
@@ -29,7 +32,7 @@ app.get('/', (req, res) => {
     res.send('Hello from leave tracker backend!')
 })
 
-app.use('/api/test', testRoute)
+app.use('/api/user', authRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
