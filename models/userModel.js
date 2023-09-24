@@ -11,7 +11,7 @@ const userSchema = new Schema({
   emailVerifiedAt: { type: Date },
   recoveryEmail: { type: String },
   address: [addressSchema],
-  dop: { type: String },
+  dob: { type: String },
   password: { type: String, required: true },
   isAccountActivatedByOwner: { type: Boolean, default: false },
   otp: { type: Number },
