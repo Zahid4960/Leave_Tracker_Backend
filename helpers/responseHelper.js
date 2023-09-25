@@ -21,7 +21,7 @@ exports.sendsuccessResponse = (res, statusCode, message, data) => {
  * @param {*} statusCode 
  * @param {*} message 
  */
-exports.sendErrorResponse = (res = res, statusCode, message) => {
+exports.sendErrorResponse = (res, statusCode, message) => {
     res.status(statusCode).json({
         status: 'error',
         success: false,
@@ -40,6 +40,7 @@ exports.sendExceptionResponse = (res, err) => {
     res.status(500).json({
         status: 'exception',
         success: false,
-        message: err.message
+        message: err.message,
+        stack: err.stack
     })
 }

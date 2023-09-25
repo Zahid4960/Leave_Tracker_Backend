@@ -42,11 +42,11 @@ exports.login = async (email, password, isRemember) => {
 
             return userPayload
         }
-        // else{
-        //     throw new exceptionHelper.customExceptionHandler(400, 'User does not exist!')
-        // }
+        else{
+            throw new Error('Password does not match!')
+        }
     }
-//     else{
-//         throw new Error('User does not exist!')
-//    }
+    else{
+        throw new Error('User does not exist!')
+   }
 }
