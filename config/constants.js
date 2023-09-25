@@ -1,3 +1,3 @@
 exports.ADMIN = 'Admin'
 exports.USER = 'User'
-exports.COMPANY = 'Company'
+exports.OFFICE = 'Office'
