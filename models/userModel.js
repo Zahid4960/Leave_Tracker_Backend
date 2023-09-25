@@ -1,4 +1,5 @@
 const { mongoose, Schema } = require('mongoose')
+const office = require('./officeModel')
 const commonSchema = require('../schemas/commonSchema')
 const addressSchema = require('../schemas/addressSchema')
 
@@ -17,7 +18,8 @@ const userSchema = new Schema({
   otp: { type: Number },
   token: { type: String, required: true },
   isRemember: { type: Boolean, default: false },
-  userType: { type: String, enum: ['Company', 'User', 'Admin'], default: 'User' },
+  userType: { type: String, enum: ['Office', 'User', 'Admin'], default: 'User' },
+  officeId: { type: Schema.ObjectId, ref: 'office' },
   ...commonSchema.obj
 });
 
