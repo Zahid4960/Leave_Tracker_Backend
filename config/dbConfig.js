@@ -19,7 +19,7 @@ exports.dbConnection = async () => {
         }
     }catch(err){
         console.log('DB connection failed. Please check error log.')
-        console.error(err);
-        process.exit(1);
+        console.error(err)
+        process.exit(1)
     }
 }

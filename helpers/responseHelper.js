@@ -6,7 +6,7 @@
  * @param {*} data 
  */
 exports.successResponse = (res, statusCode, message, data) => {
-    res.status(statusCode).json({
+    return res.status(statusCode).json({
         status: 'success',
         message: message,
         data: data
@@ -21,7 +21,7 @@ exports.successResponse = (res, statusCode, message, data) => {
  * @param {*} message 
  */
 exports.errorResponse = (res, statusCode, message) => {
-    res.status(statusCode).json({
+    return res.status(statusCode).json({
         status: 'error',
         message: message
     })
@@ -35,7 +35,7 @@ exports.errorResponse = (res, statusCode, message) => {
  * @param {*} exceptionMessage 
  */
 exports.exceptionResponse = (res, err) => {
-    res.status(500).json({
+    return res.status(500).json({
         status: 'exception',
         message: err.message,
         stack: err.stack

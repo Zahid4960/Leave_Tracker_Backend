@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 /**
- * check if user exist or not by given email
+ * function to check if user exist or not by given email
  * @param {*} email 
  * @returns boolean
  */

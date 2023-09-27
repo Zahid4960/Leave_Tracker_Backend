@@ -16,9 +16,9 @@ exports.logIn = async (req, res) => {
     try{
       let data = await login(email, password, isRemember)
 
-      successResponse(res, 200, 'User data found!', data)
+      return successResponse(res, 200, 'User data found!', data)
     }catch(err){
         console.error(err)
-        exceptionResponse(res, err)
+        return exceptionResponse(res, err)
     }
 }
