@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 /**
- * check if user exist or not by given email
+ * function to check if user exist or not by given email
  * @param {*} email 
  * @returns boolean
  */
@@ -13,6 +13,16 @@ exports.isUserExistOrNotByEmail = async (email) => {
     let user = await userModel.findOne({ email: email })
 
     return user !== null ? true : false
+}
+
+
+/**
+ * function to find user by email
+ * @param {*} email 
+ * @returns user
+ */
+exports.findUserByEmail = async (email) => {
+    return await userModel.findOne({ email: email })
 }
 
 

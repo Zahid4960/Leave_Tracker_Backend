@@ -39,8 +39,8 @@ exports.createSuperAdminUser = async () => {
         }
     }catch(err){
         console.log('Super admin user creation failed. Please check error log.')
-        console.error(err);
-        process.exit(1);
+        console.error(err)
+        process.exit(1)
     }
 }
 

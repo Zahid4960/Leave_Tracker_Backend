@@ -9,10 +9,10 @@ const path = require('path');
 const port = process.env.PORT
 
 const authRoute = require('./routers/authRouter')
+const officeTypeRoute = require('./routers/officeTypeRouter')
 
 const { dbConnection } = require('./config/dbConfig')
 const { createSuperAdminUser } = require('./config/superAdminUserConfig')
-
 
 const app = express()
 
@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/user', authRoute)
+app.use('/api/office-type', officeTypeRoute)
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`)
