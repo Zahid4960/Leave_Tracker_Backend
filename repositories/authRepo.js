@@ -17,6 +17,16 @@ exports.isUserExistOrNotByEmail = async (email) => {
 
 
 /**
+ * function to find user by email
+ * @param {*} email 
+ * @returns user
+ */
+exports.findUserByEmail = async (email) => {
+    return await userModel.findOne({ email: email })
+}
+
+
+/**
  * function to create hashed/encrypted password
  * @param {*} plainPassword 
  * @param {*} salt 

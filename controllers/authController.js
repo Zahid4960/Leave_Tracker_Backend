@@ -1,8 +1,8 @@
 const { login } = require('../services/authService')
 const { 
-    sendsuccessResponse, 
-    sendErrorResponse,
-    sendExceptionResponse 
+    successResponse, 
+    errorResponse,
+    exceptionResponse 
 } = require('../helpers/responseHelper')
 
 
@@ -16,9 +16,9 @@ exports.logIn = async (req, res) => {
     try{
       let data = await login(email, password, isRemember)
 
-      sendsuccessResponse(res, 200, 'User data found!', data)
+      successResponse(res, 200, 'User data found!', data)
     }catch(err){
         console.error(err)
-        sendExceptionResponse(res, err)
+        exceptionResponse(res, err)
     }
 }

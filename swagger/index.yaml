@@ -77,30 +77,29 @@ paths:
 #############################################################################################################
   /office-type/create:
     post:
-      summary: User login
+      summary: Office type creation 
       description: |
-        User log into the system with email & password
+        Office type creation by admin
       tags:
         - OfficeType
       consumes:
         - application/json
       security:
-        # - client_key: []
-        # - api_token: []
+        - api_token: []
       parameters:
         - name: item
           in: body
           required: true
           description: |
-            Set reqest parameter to log into the system
+            Set reqest parameter to create office type
           schema:
-            $ref: "#/definitions/LoginObject"
+            $ref: "#/definitions/OfficeTypeObject"
       responses:
         "200":
           description: |
-            Response after successful log into the system
+            Response after successful creation of login type
           schema:
-            $ref: "#/definitions/LoginResponse"
+            $ref: "#/definitions/Success"
 
 
 #############################################################################################################
@@ -138,6 +137,16 @@ paths:
                                         # Definitions #                                                                                                                                                                                                      #
 ##############################################################################################################
 definitions:
+  Success:
+    type: object
+    description: |
+      Success
+    properties:
+      status: 
+        type: string
+      message: 
+        type: string
+
   LoginObject:
     type: object
     description: |
@@ -173,4 +182,17 @@ definitions:
       tokenExpiresAt:
         type: string
       userType:
+        type: string
+
+  OfficeTypeObject:
+    type: object
+    description: |
+      Office Type
+    required:
+      - officeType
+      - description
+    properties:
+      officeType:
+        type: string
+      description:
         type: string

@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel')
 const { 
     isUserExistOrNotByEmail, 
+    findUserByEmail,
     matchPassword,
     generateToken,
     tokenExpiresAt
@@ -18,7 +19,7 @@ exports.login = async (email, password, isRemember) => {
    let isUser = await isUserExistOrNotByEmail(email)
 
    if(isUser){
-        let user = await userModel.findOne({ email: email })
+        let user = await findUserByEmail(email)
        
         let isPasswordMatched = await matchPassword(password, user.password)
 
