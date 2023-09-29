@@ -11,6 +11,7 @@ const {
  * controller to handle office type creation
  * @param {*} req 
  * @param {*} res 
+ * @returns successResponse || errorResponse || exceptionResponse
  */
 exports.create = async (req, res) => {
    try {
@@ -23,9 +24,10 @@ exports.create = async (req, res) => {
         }
 
         const officeTypeData = await create(item)
+        console.log(officeTypeData)
 
         if(officeTypeData){
-            return successResponse(res, 201, 'Office type created successfully!')
+            return successResponse(res, 201, 'Office type created successfully!', officeTypeData)
         }
    } catch (err) {
         console.log(err)

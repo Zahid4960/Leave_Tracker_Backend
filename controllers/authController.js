@@ -10,6 +10,7 @@ const {
  * controller to handle login functionality
  * @param {*} req 
  * @param {*} res 
+ * @returns successResponse || exceptionResponse
  */
 exports.logIn = async (req, res) => {
     let { email, password, isRemember } = req.body
