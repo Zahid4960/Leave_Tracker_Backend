@@ -23,16 +23,15 @@ const verifyToken = (req, res, next, verifyFor) => {
         }
 
         if(decodedToken?.email && verifyFor === constantFile.ADMIN){
-            console.log(decodedToken)
             const user = await findUserByEmail(decodedToken.email)
-            console.log(user)
-            if(user?.userType === constantFile.ADMIN){
-                console.log('check')
+
+            if(user?.userType !== constantFile.ADMIN){
                 return errorResponse(res, 401, 'You do not have authorization to access this api!')
             }
+            
+            next()
         }
     })
-    next();
 }
 
 

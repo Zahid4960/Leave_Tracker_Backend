@@ -97,9 +97,34 @@ paths:
       responses:
         "200":
           description: |
-            Response after successful creation of login type
+            Response after successful creation of office type
           schema:
             $ref: "#/definitions/Success"
+
+  /office-type/{officeTypeId}:
+    get:
+      summary: Get office type by id 
+      description: |
+        Get a specific office type by it's office type id
+      tags:
+        - OfficeType
+      consumes:
+        - application/json
+      security:
+        - api_token: []
+      parameters:
+        - name: officeTypeId
+          in: path
+          required: true
+          type: string
+          description: |
+            Set path value to office type
+      responses:
+        "200":
+          description: |
+            Response after getting office type by office type id
+          schema:
+            $ref: "#/definitions/officeTypeResObject"
 
 
 #############################################################################################################
@@ -196,3 +221,23 @@ definitions:
         type: string
       description:
         type: string
+
+  officeTypeResObject:
+    type: object
+    description: |
+      Office type response object
+    properties:
+      id:
+        type: string
+      officeType:
+        type: string
+      description:
+        type: string
+      isActive:
+        type: boolean
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt: 
+        type: string
+        format: date-time
