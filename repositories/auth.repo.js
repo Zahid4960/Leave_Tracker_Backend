@@ -1,4 +1,4 @@
-const userModel = require('../models/userModel')
+const UserModel = require('../models/user.model')
 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
  * @returns boolean
  */
 exports.isUserExistOrNotByEmail = async (email) => {
-    let user = await userModel.findOne({ email: email })
+    let user = await UserModel.findOne({ email: email })
 
     return user !== null ? true : false
 }
@@ -22,7 +22,7 @@ exports.isUserExistOrNotByEmail = async (email) => {
  * @returns user
  */
 exports.findUserByEmail = async (email) => {
-    return await userModel.findOne({ email: email })
+    return await UserModel.findOne({ email: email })
 }
 
 
@@ -72,7 +72,7 @@ exports.tokenExpiresAt = async (token) => {
     let decodedToken = jwt.decode(token, { complete: true })
 
     if (decodedToken && decodedToken.payload?.exp) {
-        const expirationTimeInMilliseconds =decodedToken.payload?.exp * 1000
+        const expirationTimeInMilliseconds = decodedToken.payload?.exp * 1000
         return new Date(expirationTimeInMilliseconds)
       }
 }

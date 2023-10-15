@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const officeTypesController = require('../controllers/officeTypesController')
-const { verifyAdminToken } = require('../middlewares/authMiddleware')
+const officeTypesController = require('../controllers/office-types.controller')
+const { verifyAdminToken } = require('../middlewares/auth.middleware')
 
 router.post('/create', verifyAdminToken, officeTypesController.store)
 router.get('/:officeTypeId', verifyAdminToken, officeTypesController.show)

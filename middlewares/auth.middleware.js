@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
-const constantFile = require('../config/constants')
-const { errorResponse } = require('../helpers/responseHelper')
-const { findUserByEmail } = require('../repositories/authRepo')
+const constantFile = require('../constant/constants')
+const { errorResponse } = require('../helpers/response.helper')
+const { findUserByEmail } = require('../repositories/auth.repo')
 
 
 /**

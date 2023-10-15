@@ -1,13 +1,6 @@
-const officeTypeValidationSchema = require('../validation/officeTypeValidation')
-const { 
-    store,
-    show
-} = require('../services/officeTypeService')
-const { 
-    successResponse,
-    errorResponse,
-    exceptionResponse
-} = require('../helpers/responseHelper')
+const officeTypeValidationSchema = require('../validation/office-type.validation')
+const { store, show } = require('../services/office-type.service')
+const { successResponse, errorResponse, exceptionResponse } = require('../helpers/response.helper')
 
 
 /**
@@ -31,7 +24,7 @@ exports.store = async (req, res) => {
             return successResponse(res, 201, 'Office type created successfully!')
         }
    } catch (err) {
-        console.log(err)
+        console.error(err)
         return exceptionResponse(res, err)
    }
 }
@@ -51,7 +44,7 @@ exports.show = async (req, res) => {
 
         return successResponse(res, 200, 'Office type data found!', officeTypeData)
     } catch (err) {
-        console.log(err)
+        console.error(err)
         return exceptionResponse(res, err)
     }
 }

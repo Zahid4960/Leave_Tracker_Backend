@@ -1,9 +1,5 @@
-const { login } = require('../services/authService')
-const { 
-    successResponse, 
-    errorResponse,
-    exceptionResponse 
-} = require('../helpers/responseHelper')
+const { login } = require('../services/auth.service')
+const { successResponse, exceptionResponse } = require('../helpers/response.helper')
 
 
 /**
