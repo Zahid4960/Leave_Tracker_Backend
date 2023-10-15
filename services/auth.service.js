@@ -1,11 +1,11 @@
-const userModel = require('../models/userModel')
+const userModel = require('../models/user.model')
 const { 
     isUserExistOrNotByEmail, 
     findUserByEmail,
     matchPassword,
     generateToken,
     tokenExpiresAt
-} = require('../repositories/authRepo')
+} = require('../repositories/auth.repo')
 
 
 /**

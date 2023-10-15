@@ -1,4 +1,4 @@
-const officeTypeModel = require('../models/officeTypeModel')
+const officeTypeModel = require('../models/office-type.model')
 
 
 /**

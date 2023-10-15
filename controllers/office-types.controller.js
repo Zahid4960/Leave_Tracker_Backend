@@ -1,13 +1,6 @@
-const officeTypeValidationSchema = require('../validation/officeTypeValidation')
-const { 
-    store,
-    show
-} = require('../services/officeTypeService')
-const { 
-    successResponse,
-    errorResponse,
-    exceptionResponse
-} = require('../helpers/responseHelper')
+const officeTypeValidationSchema = require('../validation/office-type.validation')
+const { store, show } = require('../services/office-type.service')
+const { successResponse, errorResponse, exceptionResponse } = require('../helpers/response.helper')
 
 
 /**

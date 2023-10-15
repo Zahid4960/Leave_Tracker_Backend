@@ -1,7 +1,6 @@
 const { mongoose, Schema } = require('mongoose')
-const office = require('./officeModel')
-const commonSchema = require('../schemas/commonSchema')
-const addressSchema = require('../schemas/addressSchema')
+const commonSchema = require('../schemas/common.schema')
+const addressSchema = require('../schemas/address.schema')
 
 
 const userSchema = new Schema({

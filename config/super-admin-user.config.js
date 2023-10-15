@@ -1,9 +1,5 @@
-const userModel = require('../models/userModel')
-const {
-    isUserExistOrNotByEmail,
-    generateHashedPasword,
-    generateToken
-} = require('../repositories/authRepo')
+const userModel = require('../models/user.model')
+const { isUserExistOrNotByEmail, generateHashedPasword, generateToken } = require('../repositories/auth.repo')
 
 const email = process.env.ADMIN_EMAIL
 const recoveryEmail = process.env.ADMIN_RECOVERY_EMIAL
@@ -20,7 +16,7 @@ const AdminPassword = process.env.ADMIN_PASSWORD
 const salt = process.env.PASSWORD_SALT
 const secret = process.env.JWT_SECRET
 
-const constantFile = require('./constants')
+const constantFile = require('../constant/constants')
 
 
 /**

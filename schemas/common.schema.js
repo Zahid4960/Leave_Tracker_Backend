@@ -1,5 +1,5 @@
-const { mongoose, Schema } = require('mongoose')
-const user = require('../models/userModel')
+const { Schema } = require('mongoose')
+
 
 const commonSchema = new Schema({
     createdAt: { type: Date, default: Date.now() },
