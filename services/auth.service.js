@@ -1,4 +1,5 @@
-const userModel = require('../models/user.model')
+const SuccessLoginPayload = require('../payload/success-login.payload')
+const { convertIsoDateTimeToUTCDateTime } = require('../helpers/settings.helper')
 const { 
     isUserExistOrNotByEmail, 
     findUserByEmail,
@@ -32,16 +33,15 @@ exports.login = async (email, password, isRemember) => {
             user.isRemember = isRemember
             user.save()
             
-            let userPayload = {
-                id: user._id,
-                firstName: user.firstName,
-                email: user.email,
-                token: token,
-                tokenExpiresAt: tokenExpiry,
-                userType: user.userType
-            }
+            const payload = new SuccessLoginPayload()
+            payload.id = user._id
+            payload.firstName = user.firstName
+            payload.email = user.email
+            payload.token = token
+            payload.tokenExpiresAt = convertIsoDateTimeToUTCDateTime(tokenExpiry)
+            payload.userType = user.userType
 
-            return userPayload
+            return payload
         }
         else{
             throw new Error('Password does not match!')

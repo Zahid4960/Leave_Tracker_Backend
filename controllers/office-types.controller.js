@@ -24,7 +24,7 @@ exports.store = async (req, res) => {
             return successResponse(res, 201, 'Office type created successfully!')
         }
    } catch (err) {
-        console.log(err)
+        console.error(err)
         return exceptionResponse(res, err)
    }
 }
@@ -44,7 +44,7 @@ exports.show = async (req, res) => {
 
         return successResponse(res, 200, 'Office type data found!', officeTypeData)
     } catch (err) {
-        console.log(err)
+        console.error(err)
         return exceptionResponse(res, err)
     }
 }
