@@ -8,11 +8,11 @@ const path = require('path');
 
 const port = process.env.PORT
 
-const authRoute = require('./routers/authRouter')
-const officeTypeRoute = require('./routers/officeTypeRouter')
+const authRoute = require('./routers/auth.router')
+const officeTypeRoute = require('./routers/office-type.router')
 
-const { dbConnection } = require('./config/dbConfig')
-const { createSuperAdminUser } = require('./config/superAdminUserConfig')
+const { dbConnection } = require('./config/db.config')
+const { createSuperAdminUser } = require('./config/super-admin-user.config')
 
 const app = express()
 
