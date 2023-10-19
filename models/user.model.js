@@ -3,6 +3,9 @@ const commonSchema = require('../schemas/common.schema')
 const addressSchema = require('../schemas/address.schema')
 
 
+/**
+ * model for user
+ */
 const userSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String },

@@ -1,20 +1,15 @@
 const SuccessLoginPayload = require('../payload/success-login.payload')
 const { convertIsoDateTimeToUTCDateTime } = require('../helpers/settings.helper')
-const { 
-    isUserExistOrNotByEmail, 
-    findUserByEmail,
-    matchPassword,
-    generateToken,
-    tokenExpiresAt
-} = require('../repositories/auth.repo')
+const { isUserExistOrNotByEmail, findUserByEmail, matchPassword, generateToken, tokenExpiresAt } = require('../repositories/auth.repo')
+const CustomException  = require('../utility/custom-exception')
 
 
 /**
- * service to handle login functionality
- * @param {*} email 
- * @param {*} password 
- * @param {*} isRemember 
- * @returns exception || user payload on successful login
+ * service function to handle login functionality
+ * @param {string} email
+ * @param {string} password
+ * @param {boolean} isRemember
+ * @returns {*} exception || user payload on successful login
  */
 exports.login = async (email, password, isRemember) => {
    let isUser = await isUserExistOrNotByEmail(email)
@@ -44,10 +39,10 @@ exports.login = async (email, password, isRemember) => {
             return payload
         }
         else{
-            throw new Error('Password does not match!')
+            throw new CustomException(409, 'Password does not match!')
         }
     }
     else{
-        throw new Error('User does not exist!')
+       throw new CustomException(404, 'User does not exist!')
    }
 }
