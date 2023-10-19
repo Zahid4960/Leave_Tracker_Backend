@@ -1,8 +1,10 @@
-const { Mongoose, Schema, default: mongoose } = require('mongoose')
-const officeType = require('./officeTypeModel')
-const commonSchema = require('../schemas/commonSchema')
+const { Schema, mongoose } = require('mongoose')
+const commonSchema = require('../schemas/common.schema')
 
 
+/**
+ * model for office
+ */
 const officeSchema = new Schema({
     officeTypeId: { type: Schema.ObjectId, ref: 'officeType' },
     isActive: { type: Boolean, default: true },

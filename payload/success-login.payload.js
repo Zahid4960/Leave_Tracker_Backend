@@ -1,3 +1,6 @@
+/**
+ * payload class for success login payload
+ */
 class SuccessLoginPayload {
     constructor(id, firstName, email, token, tokenExpiresAt, userType){
         this.id = id

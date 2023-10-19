@@ -2,21 +2,19 @@ const UserModel = require('../models/user.model')
 const UserDto = require('../dto/user.dto')
 const AddressDto = require('../dto/address.dto')
 const constantFile = require('../constant/constants')
-
-const { isUserExistOrNotByEmail, generateHashedPasword, generateToken } = require('../repositories/auth.repo')
-
+const { isUserExistOrNotByEmail, generateHashedPassword, generateToken } = require('../repositories/auth.repo')
 const email = process.env.ADMIN_EMAIL
 
 
 /**
- * function to create super admin user at the time of appilication mount
+ * function to create super admin user at the time of application mount
  */
 exports.createSuperAdminUser = async () => {
     try{
         let user = await isUserExistOrNotByEmail(email)
         
         if(! user){
-            if(createUser()){
+            if(await createUser()){
                 console.log('Super admin user created successfully.')
             }
         }else{
@@ -34,7 +32,7 @@ exports.createSuperAdminUser = async () => {
  * function to create super admin by using dto
  */
 const createUser = async () => {
-    const hashedPassword = await generateHashedPasword(process.env.ADMIN_PASSWORD, process.env.PASSWORD_SALT)
+    const hashedPassword = await generateHashedPassword(process.env.ADMIN_PASSWORD, process.env.PASSWORD_SALT)
     const jwtToken = await generateToken(email, process.env.JWT_SECRET)
 
     const addressDto = new AddressDto()
@@ -66,6 +64,6 @@ const createUser = async () => {
         let userId = user._id
         user.createdBy = userId
         user.updatedBy = userId
-        user.save()
+        await user.save()
     }
 }
