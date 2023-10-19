@@ -1,3 +1,6 @@
+/**
+ * dto class for user
+ */
 class UserDto {
     constructor(
         firstName,

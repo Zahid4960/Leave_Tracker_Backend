@@ -1,6 +1,9 @@
 const { Schema, mongoose } = require('mongoose')
 
 
+/**
+ * model for user login information
+ */
 const userLogInfoSchema = new Schema({
     ip: { type: String },
     country: { type: String },

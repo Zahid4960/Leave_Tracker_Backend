@@ -5,10 +5,10 @@ const { findUserByEmail } = require('../repositories/auth.repo')
 
 
 /**
- * function to verify auth token
+ * middleware function to verify auth token
  * @param {*} req 
  * @param {*} res 
- * @param {*} verifyFor 
+ * @param {string} verifyFor
  */
 const verifyToken = (req, res, next, verifyFor) => {
     const token = req.headers.authorization
@@ -36,7 +36,7 @@ const verifyToken = (req, res, next, verifyFor) => {
 
 
 /**
- * middleware to verify auth token for admin
+ * middleware function to verify auth token for admin
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 
@@ -47,7 +47,7 @@ exports.verifyAdminToken = (req, res, next) => {
 
 
 /**
- * middleware to verify auth token for user
+ * middleware function to verify auth token for user
  * @param {*} req 
  * @param {*} res 
  * @param {*} next 

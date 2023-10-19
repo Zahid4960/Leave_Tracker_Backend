@@ -4,10 +4,10 @@ const { successResponse, errorResponse, exceptionResponse } = require('../helper
 
 
 /**
- * controller to handle office type creation
+ * controller function to handle office type creation
  * @param {*} req 
  * @param {*} res 
- * @returns successResponse || errorResponse || exceptionResponse
+ * @returns {*} successResponse || errorResponse || exceptionResponse
  */
 exports.store = async (req, res) => {
    try {
@@ -31,10 +31,10 @@ exports.store = async (req, res) => {
 
 
 /**
- * controller to get a specific office type by using office type id
+ * controller function to get a specific office type by using office type id
  * @param {*} req 
  * @param {*} res 
- * @returns successResponse || exceptionResponse
+ * @returns {*} successResponse || exceptionResponse
  */
 exports.show = async (req, res) => {
     try {

@@ -1,21 +1,22 @@
 const { login } = require('../services/auth.service')
-const { successResponse, exceptionResponse } = require('../helpers/response.helper')
+const { SuccessResponse, ExceptionResponse } = require('../utility/response')
+const { responseFormatter } = require('../utility/response-formatter')
 
 
 /**
- * controller to handle login functionality
+ * controller function to handle login functionality
  * @param {*} req 
  * @param {*} res 
- * @returns successResponse || exceptionResponse
+ * @returns {*} successResponse || exceptionResponse
  */
 exports.logIn = async (req, res) => {
     let { email, password, isRemember } = req.body
     try{
-      let data = await login(email, password, isRemember)
+        let data = await login(email, password, isRemember)
 
-      return successResponse(res, 200, 'User data found!', data)
+        responseFormatter(res, new SuccessResponse(200, 'User data found!', data))
     }catch(err){
         console.error(err)
-        return exceptionResponse(res, err)
+        responseFormatter(res, new ExceptionResponse(err))
     }
 }

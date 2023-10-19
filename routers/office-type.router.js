@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
 const officeTypesController = require('../controllers/office-types.controller')
 const { verifyAdminToken } = require('../middlewares/auth.middleware')
 

@@ -1,6 +1,9 @@
+/**
+ * dto class for addresses
+ */
 class AddressDto {
-    constructor(addresName, city, state, country, postalCode){
-        this.addresName = addresName
+    constructor(addressName, city, state, country, postalCode){
+        this.addressName = addressName
         this.city = city
         this.state = state
         this.country = country

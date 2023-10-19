@@ -2,9 +2,9 @@ const officeTypeModel = require('../models/office-type.model')
 
 
 /**
- * service to handle office type creation
+ * service function to handle office type creation
  * @param {*} item 
- * @returns office type paylod
+ * @returns {*} office type payload
  */
 exports.store = async (item) => {
     return await officeTypeModel.create(item)
@@ -12,11 +12,10 @@ exports.store = async (item) => {
 
 
 /**
- * service to get a specific office type by using office type id
- * @param {*} officeTypeId 
- * @returns office type payload
+ * service function to get a specific office type by using office type id
+ * @param {string} officeTypeId
+ * @returns {*} office type payload
  */
 exports.show = async (officeTypeId) => {
-    const data = await officeTypeModel.findById(officeTypeId)
-    return data
+    return await officeTypeModel.findById(officeTypeId)
 }
