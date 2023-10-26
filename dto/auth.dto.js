@@ -1,7 +1,7 @@
 /**
  * dto class for user
  */
-class UserDto {
+class AuthDto {
     constructor(
         firstName,
         lastName,
@@ -37,4 +37,30 @@ class UserDto {
     }
 }
 
-module.exports = UserDto
+
+/**
+ * dto class for login
+ */
+class LoginDto extends AuthDto{
+    constructor(email, password, isRemember) {
+        super(email, password, isRemember)
+    }
+}
+
+
+/**
+ * dto class for success login payload
+ */
+class SuccessLoginDto extends AuthDto{
+    constructor(id, firstName, email, token, isRemember, tokenExpiresAt, userType){
+        super(firstName, email, token, isRemember, userType)
+        this.id = id
+        this.tokenExpiresAt = tokenExpiresAt
+    }
+}
+
+module.exports = {
+    AuthDto,
+    LoginDto,
+    SuccessLoginDto
+}

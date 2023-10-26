@@ -1,5 +1,5 @@
 const UserModel = require('../models/user.model')
-const UserDto = require('../dto/user.dto')
+const UserDto = require('../dto/auth.dto')
 const AddressDto = require('../dto/address.dto')
 const constantFile = require('../constant/constants')
 const { isUserExistOrNotByEmail, generateHashedPassword, generateToken } = require('../repositories/auth.repo')
