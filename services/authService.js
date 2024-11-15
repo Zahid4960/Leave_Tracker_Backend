@@ -37,18 +37,29 @@
 const authRepo = require('../repositories/authRepo')
 const authHelper = require('../utilities/helpers/authHelper')
 const { CustomException } = require('../utilities/responses')
+const { STATUS_CODES } = require('../utilities/constants')
 const { SignupSuccessResponseDTO } = require('../dto/authDTO')
 
 class AuthService {
     constructor(authRepo) {
         this.authRepo = authRepo
+        this.authHelper = authHelper
     }
 
     async signup(payload) {
+        /**
+         * Handles the signup business logic.
+         * - Checks if a user with the given email already exists in the repository.
+         * - If the user does not exist:
+         *   - Encrypts the user's password using `authHelper.hashPassword`.
+         *   - Creates a new user in the repository with the provided payload.
+         *   - Maps the created user's data to a `SignupSuccessResponseDTO` object and returns it.
+         * - If the user exists, throws a `CustomException` with a conflict status code.
+         */
         const user = await authRepo.findUserByEmail(payload.email)
 
         if (!user) {
-            const encryptPassword = await authHelper.hashPassword(payload.password)
+            const encryptPassword = await this.authHelper.hashPassword(payload.password)
             payload.password = encryptPassword
             
             const createdUser = await authRepo.createUser(payload)
@@ -64,7 +75,7 @@ class AuthService {
             return response
         }
 
-        throw new CustomException(409, 'User already exists')
+        throw new CustomException(STATUS_CODES.CONFLICT, 'User already exists')
     }
 }
 
