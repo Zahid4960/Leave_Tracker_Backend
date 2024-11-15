@@ -37,6 +37,26 @@ class AuthDto {
     }
 }
 
+class SignupDTO {
+    constructor(firstName, lastName, email, password) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.email = email
+        this.password = password
+    }
+}
+
+class SignupSuccessResponseDTO {
+    constructor(id, firstName, lastName, email, isAccountActivatedByOwner, userType) {
+        this.id = id
+        this.firstName = firstName
+        this.lastName = lastName
+        this.email = email
+        this.isAccountActivatedByOwner = isAccountActivatedByOwner
+        this.userType = userType
+    }
+}
+
 
 /**
  * dto class for login
@@ -61,6 +81,8 @@ class SuccessLoginDto extends AuthDto{
 
 module.exports = {
     AuthDto,
+    SignupDTO,
+    SignupSuccessResponseDTO,
     LoginDto,
     SuccessLoginDto
 }

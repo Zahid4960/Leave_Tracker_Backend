@@ -1,8 +1,8 @@
 require('dotenv').config()
 
-const authRoute = require('./routers/auth.router')
+const authRouter = require('./routers/authRouter')
 const { createSuperAdminUser } = require('./config/super-admin-user.config')
-const DbConnection = require('./config/dbConnection')
+const DbConnectionConfig = require('./config/dbConnection')
 const express = require('express')
 const fs = require('fs')
 const jsYaml = require('js-yaml')
@@ -14,14 +14,15 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-DbConnection.connect()
+DbConnectionConfig.connect()
 // createSuperAdminUser()
 
+const apiVersion = 'v1'
 const swaggerDocument = jsYaml.load(fs.readFileSync(path.join(__dirname, './swagger/index.yaml'), 'utf8'))
-app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(`/${apiVersion}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api/user', authRoute)
-app.use('/api/office-type', officeTypeRoute)
+app.use(`/api/${apiVersion}/auth`, authRouter)
+app.use(`/api/${apiVersion}/office-type`, officeTypeRoute)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT}`)
