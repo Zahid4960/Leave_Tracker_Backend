@@ -1,36 +1,28 @@
 require('dotenv').config()
 
-const express = require('express')
-const swaggerUi = require('swagger-ui-express');
-const jsYaml = require('js-yaml');
-const fs = require('fs');
-const path = require('path');
-const port = process.env.PORT
 const authRoute = require('./routers/auth.router')
-const officeTypeRoute = require('./routers/office-type.router')
-const { dbConnection } = require('./config/db.config')
 const { createSuperAdminUser } = require('./config/super-admin-user.config')
-const app = express()
+const DbConnection = require('./config/dbConnection')
+const express = require('express')
+const fs = require('fs')
+const jsYaml = require('js-yaml')
+const officeTypeRoute = require('./routers/office-type.router')
+const path = require('path')
+const swaggerUi = require('swagger-ui-express')
 
+const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
-dbConnection()
-createSuperAdminUser()
+DbConnection.connect()
+// createSuperAdminUser()
 
-// Load YAML file
 const swaggerDocument = jsYaml.load(fs.readFileSync(path.join(__dirname, './swagger/index.yaml'), 'utf8'))
-
-// Swagger setup
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-app.get('/', (req, res) => {
-    res.send('Hello from leave tracker backend!')
-})
+app.use('/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/user', authRoute)
 app.use('/api/office-type', officeTypeRoute)
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT}`)
 })
