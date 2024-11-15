@@ -1,8 +1,5 @@
-/**
- * utility class for success response
- */
 class SuccessResponse {
-    constructor(statusCode, status, message, data){
+    constructor(statusCode, message, data){
         this.statusCode = statusCode
         this.status = 'success'
         this.message = message
@@ -10,22 +7,14 @@ class SuccessResponse {
     }
 }
 
-
-/**
- * utility class for error response
- */
-class ErrorResponse extends SuccessResponse {
+class ErrorResponse {
     constructor(statusCode, message){
-        super(statusCode, message)
+        this.statusCode = statusCode
         this.status = 'error'
         this.message = message
     }
 }
 
-
-/**
- * utility class for exception response
- */
 class ExceptionResponse {
     constructor(error){
         this.statusCode = error.statusCode || 500
@@ -35,4 +24,16 @@ class ExceptionResponse {
     }
 }
 
-module.exports = { SuccessResponse, ErrorResponse, ExceptionResponse }
+class CustomException extends Error {
+    constructor(statusCode, message){
+        super(message)
+        this.statusCode = statusCode
+    }
+}
+
+module.exports = { 
+    SuccessResponse, 
+    ErrorResponse, 
+    ExceptionResponse,
+    CustomException
+}

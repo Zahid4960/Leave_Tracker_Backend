@@ -1,4 +1,4 @@
-const { SuccessLoginDto } = require('../dto/auth.dto')
+const { SuccessLoginDto } = require('../dto/authDTO')
 const { tokenExpiresAt } = require('../repositories/auth.repo')
 const { convertIsoDateTimeToUTCDateTime } = require('../helpers/settings.helper')
 
