@@ -15,9 +15,10 @@ class SuccessResponse {
  * utility class for error response
  */
 class ErrorResponse extends SuccessResponse {
-    constructor(statusCode, status, message){
+    constructor(statusCode, message){
         super(statusCode, message)
         this.status = 'error'
+        this.message = message
     }
 }
 
