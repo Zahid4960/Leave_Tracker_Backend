@@ -18,7 +18,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   isAccountActivatedByOwner: { type: Boolean, default: false },
   otp: { type: Number },
-  token: { type: String, required: true },
+  token: { type: String },
   isRemember: { type: Boolean, default: false },
   userType: { type: String, enum: ['Office', 'User', 'Admin'], default: 'User' },
   officeId: { type: Schema.ObjectId, ref: 'office' },
